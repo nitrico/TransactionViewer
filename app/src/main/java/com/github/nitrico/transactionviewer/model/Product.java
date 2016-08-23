@@ -1,7 +1,6 @@
 package com.github.nitrico.transactionviewer.model;
 
 import android.support.annotation.NonNull;
-import com.github.nitrico.transactionviewer.App;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -16,13 +15,8 @@ public class Product implements Comparable<Product>, Serializable {
         this.transactions = transactions;
     }
 
-    @Override
-    public int compareTo(@NonNull Product product) {
-        return sku.compareTo(product.sku);
-    }
-
     public double getTotal() {
-        double total = 0.0;
+        double total = 0;
         for (Transaction t: transactions) {
             total += t.toDefaultCurrency();
         }
@@ -30,7 +24,12 @@ public class Product implements Comparable<Product>, Serializable {
     }
 
     public String getTotalString() {
-        return App.DEFAULT_CURRENCY_SYMBOL + " " + String.format(Locale.ENGLISH, "%,.2f", getTotal());
+        return DataManager.DEFAULT_CURRENCY_SYMBOL + " " + String.format(Locale.ENGLISH, "%,.2f", getTotal());
+    }
+
+    @Override
+    public int compareTo(@NonNull Product product) {
+        return sku.compareTo(product.sku);
     }
 
 }

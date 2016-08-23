@@ -1,7 +1,6 @@
 package com.github.nitrico.transactionviewer.model;
 
 import android.support.annotation.NonNull;
-import com.github.nitrico.transactionviewer.App;
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -18,10 +17,10 @@ public class Transaction implements Serializable {
     }
 
     public double toDefaultCurrency() {
-        if (currency.equals(App.DEFAULT_CURRENCY)) {
+        if (currency.equals(DataManager.DEFAULT_CURRENCY)) {
             return amount;
         } else {
-            return amount * App.conversionTree.getConversionRate(currency);
+            return amount * DataManager.getInstance().getConversionTree().getConversionRate(currency);
         }
     }
 
@@ -31,7 +30,7 @@ public class Transaction implements Serializable {
     }
 
     public String toDefaultCurrencyString() {
-        return App.DEFAULT_CURRENCY_SYMBOL + " " + String.format(Locale.ENGLISH, "%,.2f", toDefaultCurrency());
+        return DataManager.DEFAULT_CURRENCY_SYMBOL + " " + String.format(Locale.ENGLISH, "%,.2f", toDefaultCurrency());
     }
 
     private String getCurrencySymbol() {

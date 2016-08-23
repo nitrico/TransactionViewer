@@ -7,7 +7,7 @@ import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class JsonUtils {
@@ -23,7 +23,7 @@ public class JsonUtils {
             return adapter.fromJson(json);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 
@@ -32,6 +32,7 @@ public class JsonUtils {
             InputStream is = context.getAssets().open(filename);
             int size = is.available();
             byte[] buffer = new byte[size];
+            //noinspection ResultOfMethodCallIgnored
             is.read(buffer);
             is.close();
             return new String(buffer, "UTF-8");

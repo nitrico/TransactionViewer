@@ -12,7 +12,7 @@ import com.github.nitrico.transactionviewer.model.Transaction;
 
 public class ProductActivity extends ListActivity {
 
-    public static final String EXTRA_PRODUCT = "com.github.nitrico.transactionviewer.model.Product";
+    public static final String EXTRA_PRODUCT = "com.github.nitrico.transactionviewer.EXTRA_PRODUCT";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

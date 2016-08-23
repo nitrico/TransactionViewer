@@ -1,4 +1,4 @@
-package com.github.nitrico.transactionviewer.model;
+package com.github.nitrico.transactionviewer.domain;
 
 import android.support.annotation.NonNull;
 import java.io.Serializable;

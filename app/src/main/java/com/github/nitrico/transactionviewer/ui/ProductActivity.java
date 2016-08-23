@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import com.github.nitrico.lastadapter.LastAdapter;
 import com.github.nitrico.transactionviewer.BR;
 import com.github.nitrico.transactionviewer.R;
-import com.github.nitrico.transactionviewer.model.Product;
-import com.github.nitrico.transactionviewer.model.Transaction;
+import com.github.nitrico.transactionviewer.domain.Product;
+import com.github.nitrico.transactionviewer.domain.Transaction;
 
 public class ProductActivity extends ListActivity {
 

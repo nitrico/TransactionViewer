@@ -1,8 +1,11 @@
-package com.github.nitrico.transactionviewer.model;
+package com.github.nitrico.transactionviewer.domain;
 
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This tree class is used to calculate the conversion rate between currencies when it is not straightforward
+ */
 public class ConversionTreeNode {
 
     private Rate item;

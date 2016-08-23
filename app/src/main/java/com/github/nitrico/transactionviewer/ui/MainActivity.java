@@ -6,8 +6,8 @@ import android.view.View;
 import com.github.nitrico.lastadapter.LastAdapter;
 import com.github.nitrico.transactionviewer.BR;
 import com.github.nitrico.transactionviewer.R;
-import com.github.nitrico.transactionviewer.model.DataManager;
-import com.github.nitrico.transactionviewer.model.Product;
+import com.github.nitrico.transactionviewer.domain.DataManager;
+import com.github.nitrico.transactionviewer.domain.Product;
 
 public class MainActivity extends ListActivity implements DataManager.Callback,
                                                           LastAdapter.OnClickListener {

@@ -1,4 +1,4 @@
-package com.github.nitrico.transactionviewer.model;
+package com.github.nitrico.transactionviewer.domain;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Singleton class used to manage the data structures needed by the app
+ */
 public class DataManager {
 
     public interface Callback {
@@ -20,11 +23,12 @@ public class DataManager {
     public static final String DEFAULT_CURRENCY_SYMBOL = "£";
 
     private static DataManager instance = null;
-    private List<Transaction> transactions;
-    private List<Rate> rates;
+
     private final ConversionTreeNode conversionTree = new ConversionTreeNode(null, null);
     private final List<Product> products = new LinkedList<>();
     private final List<Rate> addedRates = new LinkedList<>();
+    private List<Transaction> transactions;
+    private List<Rate> rates;
     private boolean initialized = false;
 
     private DataManager() { }
@@ -55,7 +59,6 @@ public class DataManager {
         return conversionTree;
     }
 
-
     public List<Product> getProducts() {
         throwExceptionIfNotInitialized();
         return products;
@@ -67,6 +70,9 @@ public class DataManager {
         }
     }
 
+    /**
+     * Creates a list of products sorted alphabetically by its 'sku'
+     */
     private void createProducts() {
         Hashtable<String, List<Transaction>> table = new Hashtable<>();
         for (Transaction t: transactions) {
@@ -81,6 +87,9 @@ public class DataManager {
         Collections.sort(products);
     }
 
+    /**
+     * Adds the first children of the tree, those rates which convert to 'DEFAULT_CURRENCY'
+     */
     private void createConversionTree() {
         for (Rate rate: rates) {
             if (rate.to.equals(DEFAULT_CURRENCY) && !addedRates.contains(rate)) {
@@ -93,6 +102,9 @@ public class DataManager {
         }
     }
 
+    /**
+     * Adds the rest of the needed children of the tree
+     */
     private void addChildren(ConversionTreeNode node) {
         for (Rate rate: rates) {
             if (!addedRates.contains(rate)

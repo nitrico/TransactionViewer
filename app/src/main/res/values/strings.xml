@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">Transaction Viewer</string>
+    <string name="products">Products</string>
+    <string name="transactions_for">Transactions for %1$s</string>
+    <string name="transactions">%1$d transactions</string>
+    <string name="total">Total: %1$s</string>
+
+</resources>

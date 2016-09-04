@@ -25,6 +25,6 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-    compile 'com.squareup.moshi:moshi:1.2.0'
     compile 'com.github.nitrico.lastadapter:lastadapter:1.2.1'
+    compile 'com.squareup.moshi:moshi:1.2.0'
 }

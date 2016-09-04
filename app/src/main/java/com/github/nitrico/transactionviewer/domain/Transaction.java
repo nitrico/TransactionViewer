@@ -7,20 +7,20 @@ import java.util.Locale;
 public class Transaction implements Serializable {
 
     public final double amount;
-    public final String sku;
     public final String currency;
+    public final String sku;
 
-    public Transaction(@NonNull String sku, double amount, @NonNull String currency) {
-        this.sku = sku;
+    public Transaction(double amount, @NonNull String currency, @NonNull String sku) {
         this.amount = amount;
         this.currency = currency;
+        this.sku = sku;
     }
 
     public double toDefaultCurrency() {
         if (currency.equals(DataManager.DEFAULT_CURRENCY)) {
             return amount;
         } else {
-            return amount * DataManager.getInstance().getConversionTree().getConversionRate(currency);
+            return amount * DataManager.getInstance().getConversionRate(currency);
         }
     }
 

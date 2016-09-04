@@ -16,7 +16,7 @@ public class Rate {
 
     @Override
     public String toString() {
-        return from + ">" + to +": " +rate;
+        return from + ">" + to + ": " + rate;
     }
 
 }

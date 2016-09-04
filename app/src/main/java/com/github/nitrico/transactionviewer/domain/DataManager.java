@@ -46,7 +46,7 @@ public class DataManager {
             rates = JsonUtils.loadListFromAssetsFile(context, DATA_DIR + "/rates.json", Rate.class);
             createProducts();
             createConversionTree();
-            conversionTree.print();
+            //conversionTree.print();
             initialized = true;
         }
         if (callback != null) {
@@ -54,14 +54,14 @@ public class DataManager {
         }
     }
 
-    public ConversionTreeNode getConversionTree() {
-        throwExceptionIfNotInitialized();
-        return conversionTree;
-    }
-
     public List<Product> getProducts() {
         throwExceptionIfNotInitialized();
         return products;
+    }
+
+    public double getConversionRate(String from) {
+        throwExceptionIfNotInitialized();
+        return conversionTree.getConversionRate(from);
     }
 
     private void throwExceptionIfNotInitialized() {
@@ -71,7 +71,7 @@ public class DataManager {
     }
 
     /**
-     * Creates a list of products sorted alphabetically by its 'sku'
+     * Create a list of products sorted alphabetically by its 'sku'
      */
     private void createProducts() {
         Hashtable<String, List<Transaction>> table = new Hashtable<>();
@@ -88,11 +88,11 @@ public class DataManager {
     }
 
     /**
-     * Adds the first children of the tree, those rates which convert to 'DEFAULT_CURRENCY'
+     * Add the first children of the tree, those rates which convert to 'DEFAULT_CURRENCY'
      */
     private void createConversionTree() {
         for (Rate rate: rates) {
-            if (rate.to.equals(DEFAULT_CURRENCY) && !addedRates.contains(rate)) {
+            if (!addedRates.contains(rate) && rate.to.equals(DEFAULT_CURRENCY)) {
                 conversionTree.addChild(rate);
                 addedRates.add(rate);
             }
@@ -103,12 +103,12 @@ public class DataManager {
     }
 
     /**
-     * Adds the rest of the needed children of the tree
+     * Add the rest of the needed children of the tree
      */
     private void addChildren(ConversionTreeNode node) {
         for (Rate rate: rates) {
             if (!addedRates.contains(rate)
-                    && rate.to.equals(node.getItem().from)
+                    && rate.to.equals(node.getRate().from)
                     && !rate.from.equals(DEFAULT_CURRENCY)
                     && conversionTree.find(rate.from) == null) {
                 node.addChild(rate);

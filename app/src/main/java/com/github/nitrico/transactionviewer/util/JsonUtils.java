@@ -29,15 +29,15 @@ public class JsonUtils {
 
     private static @NonNull String loadAssetsFile(@NonNull Context context, @NonNull String filename) {
         try {
-            InputStream is = context.getAssets().open(filename);
-            int size = is.available();
+            InputStream inputStream = context.getAssets().open(filename);
+            int size = inputStream.available();
             byte[] buffer = new byte[size];
             //noinspection ResultOfMethodCallIgnored
-            is.read(buffer);
-            is.close();
+            inputStream.read(buffer);
+            inputStream.close();
             return new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
             return "";
         }
     }

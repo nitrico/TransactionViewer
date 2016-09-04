@@ -4,16 +4,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This tree class is used to calculate the conversion rate between currencies when it is not straightforward
+ * Tree class used to calculate the conversion rate between currencies when it is not straightforward
  */
 public class ConversionTreeNode {
 
-    private Rate item;
+    private Rate rate;
     private ConversionTreeNode parent;
     private List<ConversionTreeNode> children = new LinkedList<>();
 
     public ConversionTreeNode(Rate item, ConversionTreeNode parent) {
-        this.item = item;
+        this.rate = item;
         this.parent = parent;
     }
 
@@ -21,8 +21,8 @@ public class ConversionTreeNode {
         children.add(new ConversionTreeNode(rate, this));
     }
 
-    public Rate getItem() {
-        return item;
+    public Rate getRate() {
+        return rate;
     }
 
     public ConversionTreeNode getParent() {
@@ -36,8 +36,8 @@ public class ConversionTreeNode {
     public double getConversionRate(String currency) {
         double conversionRate = 1;
         ConversionTreeNode node = find(currency);
-        while (node != null && node.getItem() != null) {
-            conversionRate *= node.getItem().rate;
+        while (node != null && node.getRate() != null) {
+            conversionRate *= node.getRate().rate;
             node = node.getParent();
         }
         return conversionRate;
@@ -49,7 +49,7 @@ public class ConversionTreeNode {
 
     private ConversionTreeNode find(ConversionTreeNode currentNode, String from) {
         ConversionTreeNode returnNode = null;
-        if (currentNode.item != null && currentNode.item.from.equals(from)) {
+        if (currentNode.rate != null && currentNode.rate.from.equals(from)) {
             returnNode = currentNode;
         }
         else if (currentNode.children.size() > 0) {
@@ -67,8 +67,8 @@ public class ConversionTreeNode {
     }
 
     private void print(ConversionTreeNode node, String appender) {
-        if (node.getItem() != null) {
-            System.out.println(appender + node.getItem().toString());
+        if (node.getRate() != null) {
+            System.out.println(appender + node.getRate().toString());
         }
         for (ConversionTreeNode n: node.getChildren()) {
             print(n, appender + appender);

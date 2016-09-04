@@ -34,7 +34,7 @@ public class MainActivity extends ListActivity implements DataManager.Callback,
     @Override
     public void onClick(Object item, View view, int type, int position) {
         Intent intent = new Intent(this, ProductActivity.class);
-        intent.putExtra(ProductActivity.EXTRA_PRODUCT, ((Product) item));
+        intent.putExtra(ProductActivity.EXTRA_PRODUCT, (Product) item);
         startActivity(intent);
     }
 
